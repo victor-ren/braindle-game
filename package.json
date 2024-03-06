@@ -1,0 +1,23 @@
+{
+  "name": "braindle-game",
+  "version": "1.0.0",
+  "description": "A daily mental workout game combining math, riddles, and pattern recognition.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "puzzle",
+    "game",
+    "brain",
+    "training",
+    "daily",
+    "challenge"
+  ],
+  "author": "Victor",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.3"
+  }
+}

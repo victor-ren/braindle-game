@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pattern Recognition - Braindle</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Fredoka+One&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="home-button">BRAINDLE!</a>
+    </div>
+
+    <h1>Pattern Recognition</h1>
+
+    <div id="pattern-puzzle">
+        <p id="pattern-question">What is the next number in the sequence? 3, 8, 18, 38, 78, 158... </p>
+        <div class="input-container">
+            <input type="text" id="pattern-answer" class="pattern-input">
+        </div>
+    </div>
+
+    <div id="keyboard">
+        <div class="keyboard-row">
+            <button class="key">1</button>
+            <button class="key">2</button>
+            <button class="key">3</button>
+        </div>
+        <div class="keyboard-row">
+            <button class="key">4</button>
+            <button class="key">5</button>
+            <button class="key">6</button>
+        </div>
+        <div class="keyboard-row">
+            <button class="key">7</button>
+            <button class="key">8</button>
+            <button class="key">9</button>
+        </div>
+        <div class="keyboard-row">
+            <button class="key">0</button>
+            <button class="key" id="key-delete">DEL</button>
+            <button class="key" id="key-submit">ENTER</button>
+        </div>
+    </div>
+    <div id="hint-buttons-container">
+        <button class="hint-button" id="hint1"><i class="fas fa-lightbulb"></i></button>
+        <button class="hint-button" id="hint2"><i class="fas fa-lightbulb"></i></button>
+    </div>
+
+    
+
+    <script src="js/pattern.js"></script>
+</body>
+</html>

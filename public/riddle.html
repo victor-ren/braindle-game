@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Riddle - Braindle</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Fredoka+One&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="home-button">BRAINDLE!</a>
+    </div>
+
+    <h1>Riddle</h1>
+
+    <div id="riddle-puzzle">
+        <p id="riddle-question">The day before two days after the day before tomorrow is Saturday. What day is it today?</p>
+        <div class="input-container">
+            <input type="text" id="riddle-answer" class="riddle-input">
+        </div>
+    </div>
+
+    <div id="riddlekeyboard">
+        <div class="keyboard-row">
+            <button class="riddle-key">Q</button>
+            <button class="riddle-key">W</button>
+            <button class="riddle-key">E</button>
+            <button class="riddle-key">R</button>
+            <button class="riddle-key">T</button>
+            <button class="riddle-key">Y</button>
+            <button class="riddle-key">U</button>
+            <button class="riddle-key">I</button>
+            <button class="riddle-key">O</button>
+            <button class="riddle-key">P</button>
+        </div>
+        <div class="riddle-keyboard-row">
+            <button class="riddle-key">A</button>
+            <button class="riddle-key">S</button>
+            <button class="riddle-key">D</button>
+            <button class="riddle-key">F</button>
+            <button class="riddle-key">G</button>
+            <button class="riddle-key">H</button>
+            <button class="riddle-key">J</button>
+            <button class="riddle-key">K</button>
+            <button class="riddle-key">L</button>
+        </div>
+        <div class="riddle-keyboard-row">
+            <button class="riddle-key">Z</button>
+            <button class="riddle-key">X</button>
+            <button class="riddle-key">C</button>
+            <button class="riddle-key">V</button>
+            <button class="riddle-key">B</button>
+            <button class="riddle-key">N</button>
+            <button class="riddle-key">M</button>
+            <button class="riddle-key" id="riddle-key-delete">DEL</button>
+            <button class="riddle-key" id="riddle-key-enter">ENTER</button>
+        </div>
+    </div>
+
+    <div id="hint-buttons-container">
+        <button class="hint-button" id="hint1"><i class="fas fa-lightbulb"></i></button>
+        <button class="hint-button" id="hint2"><i class="fas fa-lightbulb"></i></button>
+    </div>
+
+    <script src="js/riddle.js"></script>
+</body>
+</html>

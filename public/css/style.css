@@ -1,0 +1,332 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding-top: 20px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; 
+    height: 100vh;
+}
+
+
+.container {
+    width: 90%;
+    max-width: 600px;
+    margin-top: 20px; 
+    text-align: center;
+}
+
+h1 {
+    font-size: 1.8em;
+    color: #333;
+    margin: 0;
+    padding-top: 1vh;
+}
+
+.brand-name {
+    font-family: 'Fredoka One', cursive;
+    font-size: 3.5em;
+    text-transform: uppercase;
+    color: #FF4081;
+    line-height: 1.2;
+    margin-bottom: 4vh; 
+}
+
+.brain-image {
+    width: 40%;
+    max-width: 240px;
+    margin: 2vh auto 4vh; 
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 80px; 
+    margin-bottom: 4vh; 
+}
+
+.music-button {
+    position: absolute; 
+    bottom: 20px;    
+    right: 20px;    
+    z-index: 10;    
+    
+    font-size: 1.5em;
+    background-color: #FFC107;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.music-button:hover {
+    background-color: #FFB300;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1em 1.5em;
+    min-width: 150px; 
+    font-size: 1em; 
+    color: white;
+    background-color: #3498DB;
+    border: none;
+    border-radius: 15px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.button i {
+    font-size: 64px;
+    margin-top: 30px; 
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+}
+
+.button:hover {
+    background-color: #2E86C1;
+    transform: scale(1.05);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.25);
+}
+
+.button:hover i {
+    transform: rotate(10deg);
+}
+
+
+.home-button {
+    font-family: 'Fredoka One', cursive;
+    font-size: 3.5em;
+    text-transform: uppercase;
+    color: #FF4081;
+    text-decoration: none;
+    display: block;
+    margin: 0 auto; 
+    transition: color 0.3s ease;
+    text-align: center;
+    /* ... other styles ... */
+}
+    
+.home-button:hover {
+    color: #3498DB; 
+}
+
+#keyboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.keyboard-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.key {
+    padding: 10px 15px;
+    margin: 5px;
+    font-size: 1.2em;
+    border-radius: 4px;
+    border: 1px solid #333;
+    background-color: #f7f7f7;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.key {
+    width: 60px; 
+    height: 60px;
+    margin: 5px;
+    font-size: 1.2em;
+    border-radius: 5px;
+    border: 1px solid #333;
+    background-color: #f7f7f7;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif; 
+    transition: background-color 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.key {
+    border: 1px solid #ccc;
+    background-color: #fff;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    border-radius: 5px; 
+}
+
+.key:hover {
+    background-color: #eaeaea;
+}
+
+
+#key-delete, #key-submit {
+    flex: 1 0 auto; 
+    width: auto;
+    margin: 5px;
+}
+
+.keyboard-row, .riddle-keyboard-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.input-container {
+    display: flex;
+    justify-content: center;
+    width: 100%; 
+    margin-top: 20px; 
+    margin-bottom: 25px;
+}
+
+.math-input {
+    width: 80%;
+    max-width: 400px; 
+    padding: 10px;
+    margin: 20px auto; 
+    font-size: 1em;
+    display: block;
+    text-align: center;
+}
+
+.riddle-input {
+    width: 80%;
+    max-width: 400px;
+    padding: 10px;
+    margin: 20px auto; 
+    font-size: 1em;
+    display: block;
+    text-align: center;
+}
+
+.pattern-input {
+    width: 80%; 
+    max-width: 400px; 
+    padding: 10px;
+    margin: 20px auto;
+    font-size: 1em;
+    display: block;
+    text-align: center;
+}
+
+
+#hint-buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 20px;
+}
+
+.hint-button {
+    width: 100px; 
+    height: 100px; 
+    border-radius: 50%;
+    border: none;
+    background-color: #3498DB;
+    color: white;
+    font-size: 1.2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.hint-button:hover {
+    background-color: #2E86C1;
+}
+
+.hint-button i {
+    pointer-events: none;
+    font-size: 36px
+}
+
+#riddlekeyboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.riddle-key {
+    padding: 10px 15px; 
+    margin: 0 5px; 
+    background-color: #f7f7f7;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1em;
+    transition: background-color 0.2s;
+}
+
+.riddle-key:hover {
+    background-color: #e2e2e2;
+}
+
+.buttons-and-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.circle-buttons-left,
+.circle-buttons-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.circle-button {
+    width: 100px;  
+    height: 100px; 
+    margin: 45px;  
+    border-radius: 50%; 
+    border: 2px solid #3498DB;
+    background-color: #3498DB;
+    font-size: 1em; 
+    cursor: pointer;
+}
+
+.circle-button i {
+    font-size: 48px; 
+    margin-top: 28px; 
+    transition: transform 0.3s ease;
+    color: #FFFFFF;
+}
+
+.circle-button::after {
+    content: ''; 
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.circle-button:hover {
+    background-color: #2E86C1;
+    transform: scale(1.05);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.25);
+}
+
+.circle-button:hover i {
+    transform: rotate(10deg);
+}
+

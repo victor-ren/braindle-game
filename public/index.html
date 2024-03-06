@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Braindle - Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Fredoka+One&display=swap" rel="stylesheet">
+    <link rel="icon" href="/images/cartoon-brain2.PNG" type="image/png">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to <br><span class="brand-name">BRAINDLE!</span></h1>
+        
+        <div class="buttons-and-image">
+            <div class="circle-buttons-left">
+                <a href="friends.html" class="circle-button"><i class="fas fa-users"></i></a>
+                <a href="progress.html" class="circle-button"><i class="fas fa-chart-line"></i></a>
+            </div>
+
+            <img src="images/cartoon-brain.PNG" alt="Cartoon Brain" class="brain-image">
+
+            <div class="circle-buttons-right">
+                <a href="leaderboards.html" class="circle-button"><i class="fas fa-trophy"></i></a>
+                <a href="achievements.html" class="circle-button"><i class="fas fa-medal"></i></a>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <a href="math.html" class="button"><i class="fas fa-calculator"></i><br> Mathematics</a>
+            <a href="riddle.html" class="button"><i class="fas fa-question-circle"></i><br> Riddle</a>
+            <a href="pattern.html" class="button"><i class="fas fa-braille"></i><br> Pattern Recognition</a>
+            <button id="music-btn" class="music-button"><i class="fas fa-music"></i></button>
+        </div>
+    </div>
+    <div class="countdown-container">
+        <h1>Puzzles Reset In: <span id="countdown-timer"></span></h1>
+    </div>
+    
+    <script src="js/common.js">
+        document.addEventListener('DOMContentLoaded', function () {
+            var music = new Audio('path/to/your/background-music.mp3');
+            var musicButton = document.getElementById('music-btn');
+            var isPlaying = false;
+
+            musicButton.addEventListener('click', function () {
+                if (isPlaying) {
+                    music.pause();
+                } else {
+                    music.play();
+                }
+                isPlaying = !isPlaying;
+                musicButton.classList.toggle('music-on');
+            });
+
+            music.addEventListener('ended', function () {
+                isPlaying = false;
+                musicButton.classList.remove('music-on');
+            });
+        });
+    </script>
+</body>
+</html>
