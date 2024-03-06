@@ -27,12 +27,10 @@ Node.js can be downloaded from its official website here: https://nodejs.org/en
 Follow these steps to install the game properly.
 
 1. Clone the repository:
-```bash
 git clone https://github.com/victor-ren/braindle-game
 cd braindle-game
 
 2. Install dependencies:
-```bash
 npm install
 
 This command will install all the required Node.js packages, including Express.js.
@@ -40,7 +38,6 @@ This command will install all the required Node.js packages, including Express.j
 ### Running the Game
 
 To run the game locally, execute:
-```bash
 npm start
 
 This command will start the Node.js server, accessible via http://localhost:3000 on your browser.
@@ -48,7 +45,9 @@ You are now able to play Braindle!
 
 ## How to Play
 
-Braindle's user interface is very intuitive. 
+Braindle's user interface is very intuitive. Simply click any of the mathematics, riddle, or pattern recognition buttons and start thinking! 
+If you get stuck, use the hints provided at the bottom of the screen for some help. Toggle on the background music at the bottom right of the screen to elevate your gameplay experience.
+As this is a horizontal slice prototype of the game, features such as leaderboards and achievements are not fully functional at this time.
 
 
 
