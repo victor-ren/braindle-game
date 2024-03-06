@@ -3,6 +3,9 @@
 Braindle is a daily mental workout game which combines three core cognitive challenges: mathematics, riddles, and pattern recognition. 
 Each day, players delve into a new set of puzzles designed to stimulate different areas of the brain, fueling both logical and creative thinking.
 
+![image](https://github.com/victor-ren/braindle-game/assets/74844197/6d864390-3b23-430b-8f62-cdde05a4d953)
+
+
 ## Features
 
 * Daily Challenge: Each day, players are presented with a unique set of three puzzles—a math puzzle, a riddle, and a pattern recognition challenge. These puzzles change every 24 hours.
