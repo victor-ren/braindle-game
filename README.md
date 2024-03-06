@@ -33,10 +33,12 @@ Follow these steps to install the game properly.
 ```bash
 git clone https://github.com/victor-ren/braindle-game
 cd braindle-game
+```
 
 2. Install dependencies:
 ```bash
 npm install
+```
 
 This command will install all the required Node.js packages, including Express.js.
 
@@ -45,6 +47,7 @@ This command will install all the required Node.js packages, including Express.j
 To run the game locally, execute:
 ```bash
 npm start
+```
 
 This command will start the Node.js server, accessible via http://localhost:3000 on your browser.
 You are now able to play Braindle!
