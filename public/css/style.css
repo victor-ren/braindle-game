@@ -330,3 +330,51 @@ h1 {
     transform: rotate(10deg);
 }
 
+.achievement-title {
+    margin-bottom: 30px; /* Adjust the value to increase or decrease the space */
+}
+
+.achievement-button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.achievement-button {
+    position: relative; /* Position relative for absolute positioning of lock image */
+    padding: 1em 1.5em;
+    min-width: 150px; 
+    font-size: 1em; 
+    color: white;
+    background-color: #808080; /* Grey */
+    border: none;
+    border-radius: 15px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    margin-bottom: 15px; 
+}
+
+.achievement-button[data-unlocked="false"]::before {
+    content: ""; /* Empty content for pseudo element */
+    position: absolute; /* Position absolute to position the lock image */
+    top: 50%; /* Position lock image at the vertical center of the button */
+    right: 10px; 
+    transform: translateY(-50%);
+    width: 20px; /* Width of the lock image */
+    height: auto; 
+    background-size: cover; /* Cover to ensure the image fits */
+    background-repeat: no-repeat; /* No repeat of the image */
+}
+
+
+[data-unlocked="true"] .achievement-button {
+    background-color: #3498DB; /* Blue */
+}
+
+.padlock-image {
+    width: 20%;
+    max-width: 240px;
+    margin: 2vh auto 4vh; 
+}
