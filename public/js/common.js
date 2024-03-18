@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', function () {
     function updateCountdown() {
         const now = new Date();
