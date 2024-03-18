@@ -1,5 +1,5 @@
 {
-  "name": "braindle-game",
+  "name": "ls",
   "version": "1.0.0",
   "description": "A daily mental workout game combining math, riddles, and pattern recognition.",
   "main": "server.js",
@@ -18,6 +18,7 @@
   "author": "Victor",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.3"
+    "express": "^4.18.3",
+    "firebase": "^10.9.0"
   }
 }

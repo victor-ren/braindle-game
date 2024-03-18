@@ -341,10 +341,10 @@ h1 {
 }
 
 .achievement-button {
-    position: relative; /* Position relative for absolute positioning of lock image */
+    position: relative;
     padding: 1em 1.5em;
-    min-width: 150px; 
-    font-size: 1em; 
+    min-width: 150px;
+    font-size: 1em;
     color: white;
     background-color: #808080; /* Grey */
     border: none;
@@ -353,28 +353,32 @@ h1 {
     transition: all 0.3s ease;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    margin-bottom: 15px; 
+    margin-bottom: 15px;
+
+    /* Combine locked and unlocked image styles */
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
 }
 
-.achievement-button[data-unlocked="false"]::before {
-    content: ""; /* Empty content for pseudo element */
-    position: absolute; /* Position absolute to position the lock image */
-    top: 50%; /* Position lock image at the vertical center of the button */
-    right: 10px; 
-    transform: translateY(-50%);
-    width: 20px; /* Width of the lock image */
-    height: auto; 
-    background-size: cover; /* Cover to ensure the image fits */
-    background-repeat: no-repeat; /* No repeat of the image */
+.achievement-button .achievement-text {
+    display: inline-block;
 }
 
+/* Hide the unlocked icon by default */
+.achievement-button .unlocked-icon {
+    display: none;
+}
+/* Update the display based on the unlocked state */
+.achievement-button[data-unlocked="true"] .locked-icon {
+    display: none; /* Hide the locked icon when achievement is unlocked */
+}
 
-[data-unlocked="true"] .achievement-button {
+.achievement-button[data-unlocked="true"] .unlocked-icon {
+    display: inline-block; /* Display the unlocked icon when achievement is unlocked */
+}
+
+/* Update the background color for unlocked buttons */
+.achievement-button[data-unlocked="true"] {
     background-color: #3498DB; /* Blue */
-}
-
-.padlock-image {
-    width: 20%;
-    max-width: 240px;
-    margin: 2vh auto 4vh; 
 }
