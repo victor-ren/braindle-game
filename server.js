@@ -5,7 +5,6 @@ const PORT = 3000;
 
 app.use(express.json());
 
-
 app.use(express.static('public'));
 
 
@@ -33,16 +32,8 @@ app.post('/submit', (req, res) => {
     res.json({ score: score });
 });
 
+
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
 
-// ## added
-// const fs = require('fs');
-// fs.readFile('text.txt', 'utf8', (err, data) => {
-//     if (err){
-//         console.error(err);
-//         return
-//     }
-//     console.log(data);
-// });
