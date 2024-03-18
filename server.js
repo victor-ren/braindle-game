@@ -36,3 +36,13 @@ app.post('/submit', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+// ## added
+// const fs = require('fs');
+// fs.readFile('text.txt', 'utf8', (err, data) => {
+//     if (err){
+//         console.error(err);
+//         return
+//     }
+//     console.log(data);
+// });
