@@ -350,30 +350,73 @@ h1 {
 
 .progress-stats {
     font-family: 'Poppins', sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     display: flex;
-    justify-content: center; 
-    align-items: center; 
+    justify-content: space-around; 
+    align-items: baseline; 
     width: 100%;
     margin: 0; 
 }
 
 .progress-stats p {
-    margin: 0 35px; 
-    margin-left: 40px;
-    margin-right: 38px;
+    margin: 0 30px; 
+    margin-left: 55px;
+    margin-right: 55px;
+    letter-spacing: 3px;
 }
 
 .progress-stats-values {
     font-family: 'Poppins', sans-serif;
-    font-size: 40px;
+    font-size: 45px;
+    font-weight: bold;
+    line-height: 1;
     display: flex;
     justify-content: center; 
     align-items: center; 
     width: 100%;
-    margin: 0; 
+    margin-top: 20px
 }
 
 .progress-stats-values p {
-    margin: 0 40px; 
+    margin: 0 10px; 
+    margin-left: 75px;
+    margin-right: 75px;
+
 }
+
+.top-progress-stats {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    width: 100%;
+}
+
+.top-progress-stats p {
+    margin: 0 30px; 
+    margin-left: 55px;
+    margin-right: 55px;
+    letter-spacing: 3px;
+}
+
+.top-progress-stats-values {
+    font-family: 'Poppins', sans-serif;
+    font-size: 45px;
+    font-weight: bold;
+    line-height: 1;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    width: 100%;
+    
+}
+
+.top-progress-stats-values p {
+    margin: 0 10px; 
+    margin-left: 75px;
+    margin-right: 75px;
+
+
+}
+
