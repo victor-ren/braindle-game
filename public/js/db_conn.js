@@ -13,7 +13,7 @@ if (!indexedDB) {
 }
 
 // database start
-const request = indexedDB.open("Braindle_Database", 1);
+export const request = indexedDB.open("Braindle_Database", 1);
 
 // error unable to connect to database
 request.onerror = function (event) {
@@ -52,20 +52,20 @@ export function login(input_username, input_password) {
         // finding username
         if (matching !== undefined) {
             // username found, check password
-            if (matching.password == input_password){
+            if (matching.password == input_password) {
+                // Store the logged-in user's username in session storage
                 sessionStorage.setItem("logedin", true);
+                sessionStorage.setItem("username", input_username); // Set username here
                 window.location.href = "../index.html";
-            }
-            else{
-                alert("wrong password");
+            } else {
+                alert("Wrong password");
             }
         } else {
             // No match was found.
-            console.log("did not find it");
+            console.log("Did not find it");
             alert("There is no account with that username.");
-            
         }
-        };
+    };
 
 }
 
@@ -125,21 +125,27 @@ export function updateStats(username, updates) {
         }
     };
 }
-
 // function to read/access user data
 export function getUserData(username) {
     return new Promise((resolve, reject) => {
-        const db = request.result;
-        const transaction = db.transaction("data_base", "readonly");
-        const store = transaction.objectStore("data_base");
-        const request = store.get(username);
+        request.onsuccess = event => {
+            const db = event.target.result;
+            const transaction = db.transaction("data_base", "readonly");
+            const store = transaction.objectStore("data_base");
+            const getRequest = store.get(username);
 
-        request.onsuccess = () => {
-            resolve(request.result);
+            getRequest.onsuccess = () => {
+                resolve(getRequest.result);
+            };
+
+            getRequest.onerror = () => {
+                reject(getRequest.error);
+            };
         };
 
-        request.onerror = () => {
-            reject(request.error);
+        request.onerror = event => {
+            reject(event.error);
         };
     });
 }
+
