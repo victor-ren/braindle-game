@@ -330,6 +330,60 @@ h1 {
     transform: rotate(10deg);
 }
 
+
+.achievement-title {
+    margin-bottom: 30px; /* Adjust the value to increase or decrease the space */
+}
+
+.achievement-button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.achievement-button {
+    position: relative;
+    padding: 1em 1.5em;
+    min-width: 150px;
+    font-size: 1em;
+    color: white;
+    background-color: #808080; /* Grey */
+    border: none;
+    border-radius: 15px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    margin-bottom: 15px;
+
+    /* Combine locked and unlocked image styles */
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.achievement-button .achievement-text {
+    display: inline-block;
+}
+
+/* Hide the unlocked icon by default */
+.achievement-button .unlocked-icon {
+    display: none;
+}
+/* Update the display based on the unlocked state */
+.achievement-button[data-unlocked="true"] .locked-icon {
+    display: none; /* Hide the locked icon when achievement is unlocked */
+}
+
+.achievement-button[data-unlocked="true"] .unlocked-icon {
+    display: inline-block; /* Display the unlocked icon when achievement is unlocked */
+}
+
+/* Update the background color for unlocked buttons */
+.achievement-button[data-unlocked="true"] {
+    background-color: #3498DB; /* Blue */
+}
+
 .signout-button {
     position: absolute; 
     bottom: 20px;    
