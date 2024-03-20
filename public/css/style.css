@@ -330,6 +330,7 @@ h1 {
     transform: rotate(10deg);
 }
 
+
 .achievement-title {
     margin-bottom: 30px; /* Adjust the value to increase or decrease the space */
 }
@@ -382,3 +383,94 @@ h1 {
 .achievement-button[data-unlocked="true"] {
     background-color: #3498DB; /* Blue */
 }
+
+.signout-button {
+    position: absolute; 
+    bottom: 20px;    
+    left: 20px;    
+    z-index: 10;    
+    
+    font-size: 1.5em;
+    background-color: #FFC107;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.progress-stats {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-around; 
+    align-items: baseline; 
+    width: 100%;
+    margin: 0; 
+}
+
+.progress-stats p {
+    margin: 0 30px; 
+    margin-left: 55px;
+    margin-right: 55px;
+    letter-spacing: 3px;
+}
+
+.progress-stats-values {
+    font-family: 'Poppins', sans-serif;
+    font-size: 45px;
+    font-weight: bold;
+    line-height: 1;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    width: 100%;
+    margin-top: 20px
+}
+
+.progress-stats-values p {
+    margin: 0 10px; 
+    margin-left: 75px;
+    margin-right: 75px;
+
+}
+
+.top-progress-stats {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    width: 100%;
+}
+
+.top-progress-stats p {
+    margin: 0 30px; 
+    margin-left: 55px;
+    margin-right: 55px;
+    letter-spacing: 3px;
+}
+
+.top-progress-stats-values {
+    font-family: 'Poppins', sans-serif;
+    font-size: 45px;
+    font-weight: bold;
+    line-height: 1;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    width: 100%;
+    
+}
+
+.top-progress-stats-values p {
+    margin: 0 10px; 
+    margin-left: 75px;
+    margin-right: 75px;
+
+
+}
+
