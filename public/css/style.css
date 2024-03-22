@@ -366,19 +366,6 @@ h1 {
     display: inline-block;
 }
 
-/* Hide the unlocked icon by default */
-.achievement-button .unlocked-icon {
-    display: none;
-}
-/* Update the display based on the unlocked state */
-.achievement-button[data-unlocked="true"] .locked-icon {
-    display: none; /* Hide the locked icon when achievement is unlocked */
-}
-
-.achievement-button[data-unlocked="true"] .unlocked-icon {
-    display: inline-block; /* Display the unlocked icon when achievement is unlocked */
-}
-
 /* Update the background color for unlocked buttons */
 .achievement-button[data-unlocked="true"] {
     background-color: #3498DB; /* Blue */
