@@ -7,6 +7,8 @@ const indexedDB =
   window.msIndexedDB ||
   window.shimIndexedDB;
 
+let db = null;
+
 // error unable to find indexdb
 if (!indexedDB) {
   console.log("IndexedDB could not be found in this browser.");
@@ -29,9 +31,10 @@ request.onupgradeneeded = function () {
     // store.createIndex("scores", "username", ["score1", "score2"], {unique: false}); 
   };
 
-request.onsuccess = function () {
-    console.log("Database opened successfully");
-};
+  request.onsuccess = (event) => {
+    db = event.target.result;
+    console.log("Successfully connected to Database!")
+  };
 
 
 export function checkLoginStatus(){
@@ -98,6 +101,7 @@ export function signup(input_username, input_password) {
                 patterns_solved: 0
             });
             sessionStorage.setItem("logedin", true);
+            sessionStorage.setItem("username", input_username);
             window.location.href = "../index.html";
         }
     };
@@ -128,24 +132,38 @@ export function updateStats(username, updates) {
 // function to read/access user data
 export function getUserData(username) {
     return new Promise((resolve, reject) => {
-        request.onsuccess = event => {
-            const db = event.target.result;
-            const transaction = db.transaction("data_base", "readonly");
-            const store = transaction.objectStore("data_base");
-            const getRequest = store.get(username);
+        if(db == null){
+            reject("null");
+        }
+        const transaction = db.transaction("data_base", "readonly");
+        const store = transaction.objectStore("data_base");
+        const getRequest = store.get(username);
 
-            getRequest.onsuccess = () => {
-                resolve(getRequest.result);
-            };
-
-            getRequest.onerror = () => {
-                reject(getRequest.error);
-            };
+        getRequest.onsuccess = () => {
+            resolve(getRequest.result);
         };
 
-        request.onerror = event => {
-            reject(event.error);
+        getRequest.onerror = () => {
+            reject(getRequest.error);
         };
     });
 }
+// function to read/access user data
+export function getAllUserData() {
+    return new Promise((resolve, reject) => {
+        if(db == null){
+            reject("null");
+        }
+        const transaction = db.transaction("data_base", "readonly");
+        const store = transaction.objectStore("data_base");
+        const getRequest = store.getAll();
 
+        getRequest.onsuccess = () => {
+            resolve(getRequest.result);
+        };
+
+        getRequest.onerror = () => {
+            reject(getRequest.error);
+        };
+    });
+}
