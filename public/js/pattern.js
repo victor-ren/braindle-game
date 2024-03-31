@@ -1,4 +1,8 @@
+import { fetchAndUpdateRandomPuzzle, logAllPuzzles } from "./puzzles_db.js";
+
 document.addEventListener('DOMContentLoaded', function () {
+    let currentCorrectAnswer = ''; // To hold the current puzzle's correct answer
+
     fetch('/puzzles')
         .then(response => response.json())
         .then(puzzles => {
@@ -26,9 +30,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function submitAnswerPattern(answer) {
-        const correctAnswer = '318'; 
 
-        if (answer.trim() === correctAnswer) {
+        if (answer.trim() === currentCorrectAnswer) {
             alert('Correct!');
         } else {
             alert('Incorrect. Please try again.');
@@ -37,11 +40,32 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('pattern-answer').value = '';
     }
 
-    document.getElementById('hint1').addEventListener('click', function() {
-        alert('Hint 1: Observe the pattern carefully. Each number is generated in a specific way from its predecessor.');
+    // Listen for the countdownFinished event
+    document.addEventListener('countdownFinished', function() {
+        updatePatternQuestion();
+        console.log("updating pattern questions")
+        logAllPuzzles("pattern_puzzles")
     });
 
-    document.getElementById('hint2').addEventListener('click', function() {
-        alert('Hint 2: Try to determine the rule governing the sequence. It might involve arithmetic or geometric operations.');
-    });
+    function updatePatternQuestion() {
+        fetchAndUpdateRandomPuzzle('pattern_puzzles').then(puzzle => {
+            // Update UI with the fetched puzzle details
+            const patternQuestion = document.getElementById('pattern-question');
+            if (patternQuestion) {
+                patternQuestion.textContent = puzzle.puzzle_string; // Update the question text
+            }
+
+            // Update the global correct answer variable
+            currentCorrectAnswer = puzzle.answer;
+
+            // Optionally, set up hint buttons or text based on fetched puzzle
+            document.getElementById('hint1').onclick = () => alert(puzzle.hint1);
+            document.getElementById('hint2').onclick = () => alert(puzzle.hint2);
+        }).catch(error => {
+            console.error("Error fetching/updating pattern puzzle:", error);
+        });
+    }
+
+
+
 });

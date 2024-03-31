@@ -1,4 +1,8 @@
+import { fetchAndUpdateRandomPuzzle } from "./puzzles_db.js";
+
 document.addEventListener('DOMContentLoaded', function () {
+    let currentCorrectAnswer = ''; // To hold the current puzzle's correct answer
+
     document.querySelectorAll('.key').forEach(function(key) {
         key.addEventListener('click', function() {
             const keyValue = this.textContent.trim();
@@ -20,8 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function submitAnswerMath(answer) {
-        const correctAnswer = '100';
-        if (answer === correctAnswer) {
+        if (answer === currentCorrectAnswer) {
             alert('Correct!');
         } else {
             alert('Incorrect.');
@@ -29,11 +32,27 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('math-answer').value = '';
     }
 
-    document.getElementById('hint1').addEventListener('click', function() {
-        alert('Hint 1: Break down the sentence into smaller parts to make it more simple.');
+    // Listen for the countdownFinished event
+    document.addEventListener('countdownFinished', function() {
+        updateMathQuestion();
     });
 
-    document.getElementById('hint2').addEventListener('click', function() {
-        alert('Hint 2: Think of "the day before tomorrow" as "today".');
-    });
+    function updateMathQuestion() {
+        fetchAndUpdateRandomPuzzle('math_puzzles').then(puzzle => {
+            // Update UI with the fetched puzzle details
+            const mathQuestion = document.getElementById('math-question');
+            if (mathQuestion) {
+                mathQuestion.textContent = puzzle.puzzle_string; // Update the question text
+            }
+
+            // Update the global correct answer variable
+            currentCorrectAnswer = puzzle.answer;
+
+            // Optionally, set up hint buttons or text based on fetched puzzle
+            document.getElementById('hint1').onclick = () => alert(puzzle.hint1);
+            document.getElementById('hint2').onclick = () => alert(puzzle.hint2);
+        }).catch(error => {
+            console.error("Error fetching/updating math puzzle:", error);
+        });
+    }
 });
