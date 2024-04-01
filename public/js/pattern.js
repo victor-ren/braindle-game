@@ -1,3 +1,5 @@
+import { updateDailyActivity } from './db_conn.js';
+
 document.addEventListener('DOMContentLoaded', function () {
     fetch('/puzzles')
         .then(response => response.json())
@@ -27,13 +29,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function submitAnswerPattern(answer) {
         const correctAnswer = '318'; 
-
+        const username = sessionStorage.getItem('username');
+        const puzzleType = 'pattern';
+        let status = '';
+        let score = 0;
+    
         if (answer.trim() === correctAnswer) {
             alert('Correct!');
+            status = 'completed';
+            score = 100;
         } else {
-            alert('Incorrect. Please try again.');
+            alert('Incorrect.');
+            status = 'failed';
         }
 
+        if (username) {
+            updateDailyActivity(username, puzzleType, status, score);
+        }
+    
         document.getElementById('pattern-answer').value = '';
     }
 

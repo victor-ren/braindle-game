@@ -1,3 +1,5 @@
+import { updateDailyActivity } from './db_conn.js';
+
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.key').forEach(function(key) {
         key.addEventListener('click', function() {
@@ -21,11 +23,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function submitAnswerMath(answer) {
         const correctAnswer = '100';
+        const username = sessionStorage.getItem('username');
+        const puzzleType = 'math';
+        let status = '';
+        let score = 0;
+
         if (answer === correctAnswer) {
             alert('Correct!');
+            status = 'completed';
+            score = 100;
         } else {
             alert('Incorrect.');
+            status = 'failed';
         }
+
+        if (username) {
+            updateDailyActivity(username, puzzleType, status, score);
+        }
+
         document.getElementById('math-answer').value = '';
     }
 

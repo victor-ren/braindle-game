@@ -95,9 +95,11 @@ export function signup(input_username, input_password) {
                 total_score: 0,
                 maths_solved: 0,
                 riddles_solved: 0,
-                patterns_solved: 0
+                patterns_solved: 0,
+                dailyActivities: []
             });
             sessionStorage.setItem("logedin", true);
+            sessionStorage.setItem("username", input_username);
             window.location.href = "../index.html";
         }
     };
@@ -149,3 +151,38 @@ export function getUserData(username) {
     });
 }
 
+function getFormattedDate(date) {
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    return `${month}/${day}`;
+}
+
+export function updateDailyActivity(username, puzzleType, status, score) {
+    const db = request.result;
+    const transaction = db.transaction("data_base", "readwrite");
+    const store = transaction.objectStore("data_base");
+
+    const userRequest = store.get(username);
+    userRequest.onsuccess = function() {
+        const userData = userRequest.result;
+        if (userData) {
+            // Update today's activity
+            const todayFormatted = getFormattedDate(new Date());
+            let todayActivity = userData.dailyActivities.find(activity => activity.date === todayFormatted);
+            
+            if (!todayActivity) {
+                // If today's activity doesn't exist, initialize it
+                todayActivity = { date: todayFormatted, math: 'unattempted', riddle: 'unattempted', pattern: 'unattempted', dailyScore: 0 };
+                userData.dailyActivities.unshift(todayActivity); // Add to the start of the array
+            }
+            
+            // Update the status and score for the puzzle type
+            todayActivity[puzzleType] = status;
+            todayActivity.dailyScore += score;
+            
+            store.put(userData);
+        } else {
+            console.log("User not found");
+        }
+    };
+}
