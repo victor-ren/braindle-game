@@ -14,16 +14,16 @@ if (!indexedDB) {
 }
 
 // TO RESET DATABASE WHEN REQUIRED...
-// var req = indexedDB.deleteDatabase("Braindle_Database");
-// req.onsuccess = function () {
-//     console.log("Deleted database successfully");
-// };
-// req.onerror = function () {
-//     console.log("Couldn't delete database");
-// };
-// req.onblocked = function () {
-//     console.log("Couldn't delete database due to the operation being blocked");
-// };
+var req = indexedDB.deleteDatabase("Braindle_Database");
+req.onsuccess = function () {
+    console.log("Deleted database successfully");
+};
+req.onerror = function () {
+    console.log("Couldn't delete database");
+};
+req.onblocked = function () {
+    console.log("Couldn't delete database due to the operation being blocked");
+};
 
 
 // database start

@@ -4,10 +4,14 @@ document.addEventListener('DOMContentLoaded', function () {
     function updateCountdown() {
         const now = new Date();
 
-        // Calculate how many milliseconds have passed in the current 30-second block
-        const millisecondsPassedInCurrentBlock = now.getTime() % 15000;
+        //DECIDE AMOUNT OF TIME BEFORE THE PUZZLES REFRESH
+        let timer = 60*5; //in seconds, 5 minutes right now
+        timer = timer * 1000; //multiply by 1000 milliseconds to convert into seconds 
+
+        // Calculate how many milliseconds have passed in the current timer block
+        const millisecondsPassedInCurrentBlock = now.getTime() % timer;
         // Calculate the time difference as the remaining milliseconds until reaching the next 5-second block
-        const timeDifference = 15000 - millisecondsPassedInCurrentBlock;
+        const timeDifference = timer - millisecondsPassedInCurrentBlock;
 
         let hours = Math.floor(timeDifference / (1000 * 60 * 60));
         let minutes = Math.floor((timeDifference / (1000 * 60)) % 60);
@@ -28,6 +32,11 @@ document.addEventListener('DOMContentLoaded', function () {
         if (timeDifference <= 1000) { // Check if we are within the last second of the countdown
             console.log("Countdown over"); // This will log "Countdown over" to the console
             document.dispatchEvent(new CustomEvent('countdownFinished')); //REFRESHES NEW PUZZLES
+            //flag to refresh puzzles, IN CASE USER IS NOT ON THE PUZZLE'S PAGE 
+            localStorage.setItem('updateMathPuzzle', 'true');
+            localStorage.setItem('updateRiddlePuzzle', 'true');
+            localStorage.setItem('updatePatternPuzzle', 'true');
+        
         }
 
     }

@@ -1,7 +1,13 @@
 import { fetchAndUpdateRandomPuzzle, logAllPuzzles } from "./puzzles_db.js";
 
 document.addEventListener('DOMContentLoaded', function () {
-    let currentCorrectAnswer = ''; // To hold the current puzzle's correct answer
+    let currentCorrectAnswer = 'FRIDAY'; // Correct answer for the initial puzzle
+    let initialHint1 = "Hint 1: Break down the sentence into smaller parts to make it more simple."; // hint1 for the initial puzzle
+    let initialHint2 = 'Hint 2: Think of "the day before tomorrow" as "today".'; // hint2 for the initial puzzle
+
+    // Setup hint buttons with initial hints, before any new puzzles are loaded
+    document.getElementById('hint1').onclick = () => alert(initialHint1);
+    document.getElementById('hint2').onclick = () => alert(initialHint2);
 
     document.querySelectorAll('.riddle-key').forEach(function(key) {
         key.addEventListener('click', function() {
@@ -37,6 +43,13 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log("updating riddle questions")
         logAllPuzzles("riddle_puzzles")
     });
+
+    // Check if update is needed for this puzzle type, if user is not on this page when countdown finished
+    if (localStorage.getItem('updateRiddlePuzzle') === 'true') {
+        updateRiddleQuestion(); // Fetch and display new puzzle
+        localStorage.setItem('updateRiddlePuzzle', 'false'); // Reset flag
+    }
+
 
     function updateRiddleQuestion() {
         fetchAndUpdateRandomPuzzle('riddle_puzzles').then(puzzle => {

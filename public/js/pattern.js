@@ -1,7 +1,13 @@
 import { fetchAndUpdateRandomPuzzle, logAllPuzzles } from "./puzzles_db.js";
 
 document.addEventListener('DOMContentLoaded', function () {
-    let currentCorrectAnswer = ''; // To hold the current puzzle's correct answer
+    let currentCorrectAnswer = '318'; // Correct answer for the initial puzzle
+    let initialHint1 = "Hint 1: Observe the pattern carefully. Each number is generated in a specific way from its predecessor."; // hint1 for the initial puzzle
+    let initialHint2 = "Hint 2: Try to determine the rule governing the sequence. It might involve arithmetic or geometric operations."; // hint2 for the initial puzzle
+
+    // Setup hint buttons with initial hints, before any new puzzles are loaded
+    document.getElementById('hint1').onclick = () => alert(initialHint1);
+    document.getElementById('hint2').onclick = () => alert(initialHint2);
 
     fetch('/puzzles')
         .then(response => response.json())
@@ -46,6 +52,12 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log("updating pattern questions")
         logAllPuzzles("pattern_puzzles")
     });
+
+    // Check if update is needed for this puzzle type, if user is not on this page when countdown finished
+    if (localStorage.getItem('updatePatternPuzzle') === 'true') {
+        updatePatternQuestion(); // Fetch and display new puzzle
+        localStorage.setItem('updatePatternPuzzle', 'false'); // Reset flag
+    }
 
     function updatePatternQuestion() {
         fetchAndUpdateRandomPuzzle('pattern_puzzles').then(puzzle => {
