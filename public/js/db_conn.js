@@ -210,8 +210,33 @@ export function updateDailyActivity(username, puzzleType, status, score) {
             
             // Update the status and score for the puzzle type
             todayActivity[puzzleType] = status;
-            todayActivity.dailyScore += score;
+            if (status === 'completed') {
+                todayActivity.dailyScore = (todayActivity.dailyScore || 0) + score;
+                userData.total_score = (userData.total_score || 0) + score;
+            }
+
+            if (puzzleType === 'math' && status === 'completed') {
+                userData.maths_solved = (userData.maths_solved || 0) + 1;
+            }
+
+            if (puzzleType === 'riddle' && status === 'completed') {
+                userData.riddles_solved = (userData.riddles_solved || 0) + 1;
+            }
+
+            if (puzzleType === 'pattern' && status === 'completed') {
+                userData.patterns_solved = (userData.patterns_solved || 0) + 1;
+            }
+
+            if (todayActivity.math === 'completed' && todayActivity.riddle === 'completed' && todayActivity.pattern === 'completed') {
+                userData.current_streak = (userData.current_streak || 0) + 1;
+                userData.max_streak = Math.max(userData.max_streak, userData.current_streak);
+            }
             
+            if (userData.dailyActivities && userData.dailyActivities.length > 0) {
+                const mostRecentActivity = userData.dailyActivities[0];
+                userData.daily_score = mostRecentActivity.dailyScore;
+            }
+
             store.put(userData);
         } else {
             console.log("User not found");
