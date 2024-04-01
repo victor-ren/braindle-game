@@ -1,3 +1,4 @@
+import { initializePuzzles } from "./puzzles_db.js";
 
 // connecting to first available data base
 const indexedDB =
@@ -12,6 +13,19 @@ if (!indexedDB) {
   console.log("IndexedDB could not be found in this browser.");
 }
 
+// TO RESET DATABASE WHEN REQUIRED...
+// var req = indexedDB.deleteDatabase("Braindle_Database");
+// req.onsuccess = function () {
+//     console.log("Deleted database successfully");
+// };
+// req.onerror = function () {
+//     console.log("Couldn't delete database");
+// };
+// req.onblocked = function () {
+//     console.log("Couldn't delete database due to the operation being blocked");
+// };
+
+
 // database start
 export const request = indexedDB.open("Braindle_Database", 1);
 
@@ -21,12 +35,30 @@ request.onerror = function (event) {
     console.error(event);
   };
 
-request.onupgradeneeded = function () {
+  request.onupgradeneeded = function () {
     const db = request.result;
     // const store = db.createObjectStore("data_base", { keyPath: "id" });
     const store = db.createObjectStore("data_base", {keyPath:"username"});
     store.createIndex("logins", "username", ["password"], { unique: true });
-    // store.createIndex("scores", "username", ["score1", "score2"], {unique: false}); 
+    // store.createIndex("scores", "username", ["score1", "score2"], {unique: false});
+    
+    //PUZZLES HERE
+    // Create object stores for puzzles if they don't exist
+    if (!db.objectStoreNames.contains('math_puzzles')) {
+        const mathStore = db.createObjectStore('math_puzzles', { autoIncrement: true });
+        mathStore.createIndex('by_been_used', 'been_used', { unique: false });
+    }
+    if (!db.objectStoreNames.contains('riddle_puzzles')) {
+        const mathStore = db.createObjectStore('riddle_puzzles', { autoIncrement: true });
+        mathStore.createIndex('by_been_used', 'been_used', { unique: false });
+    }
+    if (!db.objectStoreNames.contains('pattern_puzzles')) {
+        const mathStore = db.createObjectStore('pattern_puzzles', { autoIncrement: true });
+        mathStore.createIndex('by_been_used', 'been_used', { unique: false });
+    }
+    
+    initializePuzzles();
+    console.log("puzzles database initialized")
   };
 
 request.onsuccess = function () {
