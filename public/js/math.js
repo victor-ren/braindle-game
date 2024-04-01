@@ -1,3 +1,4 @@
+import { updateDailyActivity } from './db_conn.js';
 import { fetchAndUpdateRandomPuzzle } from "./puzzles_db.js";
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -30,11 +31,24 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function submitAnswerMath(answer) {
+        const username = sessionStorage.getItem('username');
+        const puzzleType = 'math';
+        let status = '';
+        let score = 0;
+
         if (answer === currentCorrectAnswer) {
             alert('Correct!');
+            status = 'completed';
+            score = 100;
         } else {
             alert('Incorrect.');
+            status = 'failed';
         }
+
+        if (username) {
+            updateDailyActivity(username, puzzleType, status, score);
+        }
+
         document.getElementById('math-answer').value = '';
     }
 

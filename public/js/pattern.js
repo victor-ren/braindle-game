@@ -1,3 +1,4 @@
+import { updateDailyActivity } from './db_conn.js';
 import { fetchAndUpdateRandomPuzzle, logAllPuzzles } from "./puzzles_db.js";
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -36,13 +37,24 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function submitAnswerPattern(answer) {
-
+        const username = sessionStorage.getItem('username');
+        const puzzleType = 'pattern';
+        let status = '';
+        let score = 0;
+    
         if (answer.trim() === currentCorrectAnswer) {
             alert('Correct!');
+            status = 'completed';
+            score = 100;
         } else {
-            alert('Incorrect. Please try again.');
+            alert('Incorrect.');
+            status = 'failed';
         }
 
+        if (username) {
+            updateDailyActivity(username, puzzleType, status, score);
+        }
+    
         document.getElementById('pattern-answer').value = '';
     }
 

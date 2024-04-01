@@ -1,3 +1,4 @@
+import { updateDailyActivity } from './db_conn.js';
 import { fetchAndUpdateRandomPuzzle, logAllPuzzles } from "./puzzles_db.js";
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -29,12 +30,29 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
     function submitAnswerRiddle(answer) {
+        const username = sessionStorage.getItem('username');
+        const puzzleType = 'riddle';
+        let status = '';
+        let score = 0;
+    
         if (answer.trim().toLowerCase() === currentCorrectAnswer.toLowerCase()) {
             alert('Correct!');
+            status = 'completed';
+            score = 100;
         } else {
             alert('Incorrect.');
+            status = 'failed';
+            score = 0;
         }
         document.getElementById('riddle-answer').value = '';
+    
+        if (username) {
+            updateDailyActivity(username, puzzleType, status, score)
+                .then(() => console.log('Riddle activity updated successfully.'))
+                .catch((error) => console.error('Failed to update riddle activity:', error));
+        } else {
+            console.log('No user is currently logged in.');
+        }
     }
 
     // Listen for the countdownFinished event

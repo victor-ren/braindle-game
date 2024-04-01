@@ -16,13 +16,10 @@
     </div>
 
     <h1>Progress</h1>
-    <div class="container">
-        <div class="top-progress-stats-values">
-            <p>122</p>
-            <p>222</p>
-            <p>612</p>
-
-        </div>
+    <div class="container top-progress-stats-values">
+        <p id="current-streak">-</p>
+        <p id="max-streak">-</p>
+        <p id="total-score">-</p>
     </div>
 
     <div class="container">
@@ -34,7 +31,7 @@
     </div>
     <div class="container">
         <h2 style="font-family: 'Poppins', sans-serif; color: #333;">Past 10 Days</h2>
-        <table style="width: 600px; border-collapse: collapse; text-align: center; font-family: 'Poppins', sans-serif; table-layout: fixed;">
+        <table id="past-10-days" style="width: 600px; border-collapse: collapse; text-align: center; font-family: 'Poppins', sans-serif; table-layout: fixed;">
             <thead>
                 <tr>
                     <th style="width: 12%; border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;">Day</th>
@@ -46,74 +43,74 @@
             </thead>
             <tbody>
                 <tr>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;">03/13</td>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"><i class="fa fa-check"></i></td>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"><i class="fa fa-check"></i></td>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"><i class="fa fa-check"></i></td>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="date-9" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="math-9" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="riddle-9" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="pattern-9" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="score-9" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
                 </tr>
                 <tr>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;">03/12</td>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"><i class="fa fa-minus"></i></td>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"><i class="fa fa-minus"></i></td>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"><i class="fa fa-minus"></i></td>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="date-8" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="math-8" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="riddle-8" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="pattern-8" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="score-8" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
                 </tr>
                 <tr>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;">03/11</td>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"><i class="fa fa-check"></i></td>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"><i class="fa fa-times"></i></td>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"><i class="fa fa-minus"></i></td>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="date-7" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="math-7" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="riddle-7" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="pattern-7" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="score-7" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
                 </tr>
                 <tr>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;">03/10</td>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"><i class="fa fa-times"></i></td>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"><i class="fa fa-times"></i></td>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"><i class="fa fa-minus"></i></td>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="date-6" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="math-6" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="riddle-6" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="pattern-6" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="score-6" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
                 </tr>
                 <tr>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;">03/09</td>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"><i class="fa fa-minus"></i></td>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"><i class="fa fa-times"></i></td>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"><i class="fa fa-minus"></i></td>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="date-5" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="math-5" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="riddle-5" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="pattern-5" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="score-5" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
                 </tr>
                 <tr>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;">03/08</td>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"><i class="fa fa-minus"></i></td>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"><i class="fa fa-minus"></i></td>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"><i class="fa fa-minus"></i></td>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="date-4" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="math-4" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="riddle-4" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="pattern-4" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="score-4" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
                 </tr>
                 <tr>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;">03/07</td>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"><i class="fa fa-check"></i></td>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"><i class="fa fa-check"></i></td>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"><i class="fa fa-times"></i></td>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="date-3" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="math-3" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="riddle-3" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="pattern-3" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="score-3" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
                 </tr>
                 <tr>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;">03/06</td>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"><i class="fa fa-check"></i></td>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"><i class="fa fa-check"></i></td>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"><i class="fa fa-times"></i></td>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="date-2" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="math-2" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="riddle-2" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="pattern-2" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="score-2" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
                 </tr>
                 <tr>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;">03/05</td>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"><i class="fa fa-check"></i></td>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"><i class="fa fa-times"></i></td>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"><i class="fa fa-minus"></i></td>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="date-1" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="math-1" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="riddle-1" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="pattern-1" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="score-1" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
                 </tr>
                 <tr>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;">03/04</td>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"><i class="fa fa-check"></i></td>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"><i class="fa fa-times"></i></td>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"><i class="fa fa-check"></i></td>
-                    <td style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="date-0" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="math-0" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="riddle-0" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="pattern-0" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
+                    <td id="score-0" style="border: 3px solid #FFFFFF; padding: 8px; background-color: #3498DB; color: white;"></td>
                 </tr>
             </tbody>
         </table>
@@ -121,13 +118,10 @@
 
    
 
-    <div class="container">
-        <div class="progress-stats-values">
-            <p>33</p>
-            <p>74</p>
-            <p>61</p>
-
-        </div>
+    <div class="container progress-stats-values">
+        <p id="maths-solved">-</p>
+        <p id="riddles-solved">-</p>
+        <p id="patterns-solved">-</p>
     </div>
 
     <div class="container">
@@ -139,15 +133,7 @@
     </div>
     
     
-    <script src="js/progress.js"></script>
+    <script type="module" src="js/progress.js"></script>
 </body>
 </html>
 
-
-
-
-<!-- Past 10 days -->
-<!-- Current Streak, Max Streak (consecutive days where all 3 puzzles are completed)-->
-<!-- Daily Score, Total Score -->
-<!-- Total Days Played ("played" = attempted at least one puzzle)-->
-<!-- Day Completion Rate (fraction of days played where all 3 puzzles were completed)-->
