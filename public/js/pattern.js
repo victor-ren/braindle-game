@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentCorrectAnswer = '318'; // Correct answer for the initial puzzle
     let initialHint1 = "Hint 1: Observe the pattern carefully. Each number is generated in a specific way from its predecessor."; // hint1 for the initial puzzle
     let initialHint2 = "Hint 2: Try to determine the rule governing the sequence. It might involve arithmetic or geometric operations."; // hint2 for the initial puzzle
+    let startTime = Date.now();
 
     // Setup hint buttons with initial hints, before any new puzzles are loaded
     document.getElementById('hint1').onclick = () => alert(initialHint1);
@@ -39,13 +40,15 @@ document.addEventListener('DOMContentLoaded', function () {
     function submitAnswerPattern(answer) {
         const username = sessionStorage.getItem('username');
         const puzzleType = 'pattern';
+        const baseScore = 100;
         let status = '';
         let score = 0;
     
         if (answer.trim() === currentCorrectAnswer) {
-            alert('Correct!');
+            const finalScore = calculatePatternScore(baseScore, startTime);
+            alert(`Correct! Your score is ${finalScore}.`);
             status = 'completed';
-            score = 100;
+            score = finalScore;
         } else {
             alert('Incorrect.');
             status = 'failed';
@@ -56,6 +59,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     
         document.getElementById('pattern-answer').value = '';
+    }
+
+    function calculatePatternScore(baseScore, startTime) {
+        const endTime = Date.now();
+        const timeTaken = (endTime - startTime) / 1000; // Time taken in seconds
+        const timePenalty = Math.floor(timeTaken / 15); // 1 point deducted every 15 seconds
+        const finalScore = Math.max(baseScore - timePenalty, 50); // Ensure score doesn't go below 50
+        return finalScore;
     }
 
     // Listen for the countdownFinished event

@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentCorrectAnswer = '100'; // Correct answer for the initial puzzle
     let initialHint1 = "Hint 1: Start with 1000 and break down the problem one step at a time. 9/10 of 1000 is 900, 8/9 of 900 is 800, etc."; // hint1 for the initial puzzle
     let initialHint2 = 'Hint 2: Alternatively, work with the fractions and cancel all of the like numerators and denominators until you have a simple calculation remaining.'; // hint2 for the initial puzzle
+    let startTime = Date.now();
 
     // Setup hint buttons with initial hints, before any new puzzles are loaded
     document.getElementById('hint1').onclick = () => alert(initialHint1);
@@ -33,13 +34,15 @@ document.addEventListener('DOMContentLoaded', function () {
     function submitAnswerMath(answer) {
         const username = sessionStorage.getItem('username');
         const puzzleType = 'math';
+        const baseScore = 100;
         let status = '';
         let score = 0;
 
         if (answer === currentCorrectAnswer) {
-            alert('Correct!');
+            const finalScore = calculateMathScore(baseScore, startTime);
+            alert(`Correct! Your score is ${finalScore}.`);
             status = 'completed';
-            score = 100;
+            score = finalScore;
         } else {
             alert('Incorrect.');
             status = 'failed';
@@ -50,6 +53,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         document.getElementById('math-answer').value = '';
+    }
+
+    function calculateMathScore(baseScore, startTime) {
+        const endTime = Date.now();
+        const timeTaken = (endTime - startTime) / 1000; // Time taken in seconds
+        const timePenalty = Math.floor(timeTaken / 30); // 1 point deducted every 30 seconds
+        const finalScore = Math.max(baseScore - timePenalty, 50); // Ensure score doesn't go below 50
+        return finalScore;
     }
 
     // Listen for the countdownFinished event
