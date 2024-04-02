@@ -1,4 +1,16 @@
+import { updateDailyActivity } from './db_conn.js';
+import { fetchAndUpdateRandomPuzzle, logAllPuzzles } from "./puzzles_db.js";
+
 document.addEventListener('DOMContentLoaded', function () {
+    let currentCorrectAnswer = 'FRIDAY'; // Correct answer for the initial puzzle
+    let initialHint1 = "Hint 1: Break down the sentence into smaller parts to make it more simple."; // hint1 for the initial puzzle
+    let initialHint2 = 'Hint 2: Think of "the day before tomorrow" as "today".'; // hint2 for the initial puzzle
+    let startTime = Date.now();
+
+    // Setup hint buttons with initial hints, before any new puzzles are loaded
+    document.getElementById('hint1').onclick = () => alert(initialHint1);
+    document.getElementById('hint2').onclick = () => alert(initialHint2);
+
     document.querySelectorAll('.riddle-key').forEach(function(key) {
         key.addEventListener('click', function() {
             const keyValue = this.textContent.trim();
@@ -19,20 +31,73 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
     function submitAnswerRiddle(answer) {
-        const correctAnswer = 'FRIDAY';
-        if (answer.trim().toLowerCase() === correctAnswer.toLowerCase()) {
-            alert('Correct!');
+        const username = sessionStorage.getItem('username');
+        const puzzleType = 'riddle';
+        const baseScore = 100;
+        let status = '';
+        let score = 0;
+    
+        if (answer.trim().toLowerCase() === currentCorrectAnswer.toLowerCase()) {
+            const finalScore = calculateRiddleScore(baseScore, startTime);
+            alert(`Correct! Your score is ${finalScore}.`);
+            status = 'completed';
+            score = finalScore;
         } else {
             alert('Incorrect.');
+            status = 'failed';
         }
         document.getElementById('riddle-answer').value = '';
+    
+        if (username) {
+            updateDailyActivity(username, puzzleType, status, score)
+                .then(() => console.log('Riddle activity updated successfully.'))
+                .catch((error) => console.error('Failed to update riddle activity:', error));
+        } else {
+            console.log('No user is currently logged in.');
+        }
     }
 
-    document.getElementById('hint1').addEventListener('click', function() {
-        alert('Hint 1: Break down the sentence into smaller parts to make it more simple.');
+    function calculateRiddleScore(baseScore, startTime) {
+        const endTime = Date.now();
+        const timeTaken = (endTime - startTime) / 1000; // Time taken in seconds
+        const timePenalty = Math.floor(timeTaken / 45); // 1 point deducted every 45 seconds
+        const finalScore = Math.max(baseScore - timePenalty, 50); // Ensure score doesn't go below 50
+        return finalScore;
+    }
+
+    // Listen for the countdownFinished event
+    document.addEventListener('countdownFinished', function() {
+        updateRiddleQuestion();
+        console.log("updating riddle questions")
+        logAllPuzzles("riddle_puzzles")
     });
 
-    document.getElementById('hint2').addEventListener('click', function() {
-        alert('Hint 2: Think of "the day before tomorrow" as "today".');
-    });
+    // Check if update is needed for this puzzle type, if user is not on this page when countdown finished
+    if (localStorage.getItem('updateRiddlePuzzle') === 'true') {
+        updateRiddleQuestion(); // Fetch and display new puzzle
+        localStorage.setItem('updateRiddlePuzzle', 'false'); // Reset flag
+    }
+
+
+    function updateRiddleQuestion() {
+        fetchAndUpdateRandomPuzzle('riddle_puzzles').then(puzzle => {
+            // Update UI with the fetched puzzle details
+            const riddleQuestion = document.getElementById('riddle-question');
+            if (riddleQuestion) {
+                riddleQuestion.textContent = puzzle.puzzle_string; // Update the question text
+            }
+
+            // Update the global correct answer variable
+            currentCorrectAnswer = puzzle.answer;
+
+            // Optionally, set up hint buttons or text based on fetched puzzle
+            document.getElementById('hint1').onclick = () => alert(puzzle.hint1);
+            document.getElementById('hint2').onclick = () => alert(puzzle.hint2);
+        }).catch(error => {
+            console.error("Error fetching/updating riddle puzzle:", error);
+        });        
+    }
+
+
+
 });

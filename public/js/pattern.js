@@ -1,4 +1,16 @@
+import { updateDailyActivity } from './db_conn.js';
+import { fetchAndUpdateRandomPuzzle, logAllPuzzles } from "./puzzles_db.js";
+
 document.addEventListener('DOMContentLoaded', function () {
+    let currentCorrectAnswer = '318'; // Correct answer for the initial puzzle
+    let initialHint1 = "Hint 1: Observe the pattern carefully. Each number is generated in a specific way from its predecessor."; // hint1 for the initial puzzle
+    let initialHint2 = "Hint 2: Try to determine the rule governing the sequence. It might involve arithmetic or geometric operations."; // hint2 for the initial puzzle
+    let startTime = Date.now();
+
+    // Setup hint buttons with initial hints, before any new puzzles are loaded
+    document.getElementById('hint1').onclick = () => alert(initialHint1);
+    document.getElementById('hint2').onclick = () => alert(initialHint2);
+
     fetch('/puzzles')
         .then(response => response.json())
         .then(puzzles => {
@@ -26,22 +38,69 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function submitAnswerPattern(answer) {
-        const correctAnswer = '318'; 
-
-        if (answer.trim() === correctAnswer) {
-            alert('Correct!');
+        const username = sessionStorage.getItem('username');
+        const puzzleType = 'pattern';
+        const baseScore = 100;
+        let status = '';
+        let score = 0;
+    
+        if (answer.trim() === currentCorrectAnswer) {
+            const finalScore = calculatePatternScore(baseScore, startTime);
+            alert(`Correct! Your score is ${finalScore}.`);
+            status = 'completed';
+            score = finalScore;
         } else {
-            alert('Incorrect. Please try again.');
+            alert('Incorrect.');
+            status = 'failed';
         }
 
+        if (username) {
+            updateDailyActivity(username, puzzleType, status, score);
+        }
+    
         document.getElementById('pattern-answer').value = '';
     }
 
-    document.getElementById('hint1').addEventListener('click', function() {
-        alert('Hint 1: Observe the pattern carefully. Each number is generated in a specific way from its predecessor.');
+    function calculatePatternScore(baseScore, startTime) {
+        const endTime = Date.now();
+        const timeTaken = (endTime - startTime) / 1000; // Time taken in seconds
+        const timePenalty = Math.floor(timeTaken / 15); // 1 point deducted every 15 seconds
+        const finalScore = Math.max(baseScore - timePenalty, 50); // Ensure score doesn't go below 50
+        return finalScore;
+    }
+
+    // Listen for the countdownFinished event
+    document.addEventListener('countdownFinished', function() {
+        updatePatternQuestion();
+        console.log("updating pattern questions")
+        logAllPuzzles("pattern_puzzles")
     });
 
-    document.getElementById('hint2').addEventListener('click', function() {
-        alert('Hint 2: Try to determine the rule governing the sequence. It might involve arithmetic or geometric operations.');
-    });
+    // Check if update is needed for this puzzle type, if user is not on this page when countdown finished
+    if (localStorage.getItem('updatePatternPuzzle') === 'true') {
+        updatePatternQuestion(); // Fetch and display new puzzle
+        localStorage.setItem('updatePatternPuzzle', 'false'); // Reset flag
+    }
+
+    function updatePatternQuestion() {
+        fetchAndUpdateRandomPuzzle('pattern_puzzles').then(puzzle => {
+            // Update UI with the fetched puzzle details
+            const patternQuestion = document.getElementById('pattern-question');
+            if (patternQuestion) {
+                patternQuestion.textContent = puzzle.puzzle_string; // Update the question text
+            }
+
+            // Update the global correct answer variable
+            currentCorrectAnswer = puzzle.answer;
+
+            // Optionally, set up hint buttons or text based on fetched puzzle
+            document.getElementById('hint1').onclick = () => alert(puzzle.hint1);
+            document.getElementById('hint2').onclick = () => alert(puzzle.hint2);
+        }).catch(error => {
+            console.error("Error fetching/updating pattern puzzle:", error);
+        });
+    }
+
+
+
 });
