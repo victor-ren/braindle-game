@@ -162,6 +162,30 @@ export function updateStats(username, updates) {
 // function to read/access user data
 export function getUserData(username) {
     return new Promise((resolve, reject) => {
+        request.onsuccess = event => {
+            const db = event.target.result;
+            const transaction = db.transaction("data_base", "readonly");
+            const store = transaction.objectStore("data_base");
+            const getRequest = store.get(username);
+
+            getRequest.onsuccess = () => {
+                resolve(getRequest.result);
+            };
+
+            getRequest.onerror = () => {
+                reject(getRequest.error);
+            };
+        };
+
+        request.onerror = event => {
+            reject(event.error);
+        };
+    });
+}
+
+// function to read/access user data
+export function getLeaderBoardUserData(username) {
+    return new Promise((resolve, reject) => {
         const db = request.result;
         const transaction = db.transaction("data_base", "readonly");
         const store = transaction.objectStore("data_base");

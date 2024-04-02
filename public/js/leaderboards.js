@@ -1,4 +1,4 @@
-import { getUserData, getAllUserData, request } from './db_conn.js';
+import { getLeaderboardUserData, getAllUserData, request } from './db_conn.js';
 
 var tabs = document.querySelectorAll(".leaderboard_tabs ul li");
 var today = document.querySelector(".today");
@@ -23,8 +23,8 @@ async function updateLeaderboard(){
         const username = sessionStorage.getItem("username"); // Retrieve the username from session storage
         if (username) {
             try {
-                // Call getUserData function passing the username and request
-                const userData = await getUserData(username, request);
+                // Call getLeaderboardUserData function passing the username and request
+                const userData = await getLeaderboardUserData(username, request);
                 if (userData) {
 					// Call getAllUserData function
 					const allUserData = await getAllUserData();
