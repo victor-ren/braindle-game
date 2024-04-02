@@ -230,6 +230,8 @@ export function updateDailyActivity(username, puzzleType, status, score) {
             if (todayActivity.math === 'completed' && todayActivity.riddle === 'completed' && todayActivity.pattern === 'completed') {
                 userData.current_streak = (userData.current_streak || 0) + 1;
                 userData.max_streak = Math.max(userData.max_streak, userData.current_streak);
+            } else {
+                userData.current_streak = 0;
             }
             
             if (userData.dailyActivities && userData.dailyActivities.length > 0) {

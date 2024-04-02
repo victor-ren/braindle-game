@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentCorrectAnswer = 'FRIDAY'; // Correct answer for the initial puzzle
     let initialHint1 = "Hint 1: Break down the sentence into smaller parts to make it more simple."; // hint1 for the initial puzzle
     let initialHint2 = 'Hint 2: Think of "the day before tomorrow" as "today".'; // hint2 for the initial puzzle
+    let startTime = Date.now();
 
     // Setup hint buttons with initial hints, before any new puzzles are loaded
     document.getElementById('hint1').onclick = () => alert(initialHint1);
@@ -32,17 +33,18 @@ document.addEventListener('DOMContentLoaded', function () {
     function submitAnswerRiddle(answer) {
         const username = sessionStorage.getItem('username');
         const puzzleType = 'riddle';
+        const baseScore = 100;
         let status = '';
         let score = 0;
     
         if (answer.trim().toLowerCase() === currentCorrectAnswer.toLowerCase()) {
-            alert('Correct!');
+            const finalScore = calculateRiddleScore(baseScore, startTime);
+            alert(`Correct! Your score is ${finalScore}.`);
             status = 'completed';
-            score = 100;
+            score = finalScore;
         } else {
             alert('Incorrect.');
             status = 'failed';
-            score = 0;
         }
         document.getElementById('riddle-answer').value = '';
     
@@ -53,6 +55,14 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             console.log('No user is currently logged in.');
         }
+    }
+
+    function calculateRiddleScore(baseScore, startTime) {
+        const endTime = Date.now();
+        const timeTaken = (endTime - startTime) / 1000; // Time taken in seconds
+        const timePenalty = Math.floor(timeTaken / 45); // 1 point deducted every 45 seconds
+        const finalScore = Math.max(baseScore - timePenalty, 50); // Ensure score doesn't go below 50
+        return finalScore;
     }
 
     // Listen for the countdownFinished event
