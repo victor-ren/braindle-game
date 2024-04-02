@@ -566,3 +566,11 @@ h1 {
     margin-right: 75px;
 }
 
+.coming-soon {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2em; /* Adjust the font size as needed */
+    text-align: center;
+    margin-top: 20vh; /* Adjust the top margin to center vertically */
+    color: #333; /* Adjust the color as needed */
+}
+
