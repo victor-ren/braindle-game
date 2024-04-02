@@ -14,11 +14,14 @@ Each day, players delve into a new set of puzzles designed to stimulate differen
 * Pattern Identification: In the pattern recognition puzzle, players analyze visual patterns or sequences and determine the missing pieces or the next sequence.
 * Hints and Tips: If stuck, players can access hints for a step in the right direction.
 * Music: Players can toggle background music to enhance their gameplay experience and get them in a thinking mood.
-### Work in Progress
 * Leaderboards: Players can compare their daily scores with friends and the wider “Braindle” community on global leaderboards.
-* Friends: Players can add their friends to track each other's progress and compete together.
 * Achievements: Players earn achievements and badges for reaching specific milestones, such as completing a set number of consecutive puzzles or achieving high scores.
 * Progress: Visual graphs display the player’s progress over time, showing improvements in speed and accuracy. Players can also track their daily scores and streaks.
+
+### Work in Progress
+
+* Friends: Players can add their friends to track each other's progress and compete together.
+
 
 ## Prerequisites
 
