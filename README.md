@@ -59,7 +59,7 @@ You are now able to play Braindle!
 
 Braindle's user interface is very intuitive. Simply click any of the mathematics, riddle, or pattern recognition buttons and start thinking! 
 If you get stuck, use the hints provided at the bottom of the screen for some help. Toggle on the background music at the bottom right of the screen to elevate your gameplay experience.
-As this is a horizontal slice prototype of the game, features such as leaderboards and achievements are not yet fully functional.
+Click on any of the progress, achievements, or leaderboards buttons to track your performance each day. Puzzles will reset every day at 12:00am UTC.
 
 
 
