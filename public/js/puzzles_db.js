@@ -95,6 +95,30 @@ export function initializePuzzles() {
     answer: "m"
   });
 
+  addPuzzle('riddle_puzzles', {
+    puzzle_string: "I speak without a mouth and hear without ears. I have no body, but I come alive with wind. What am I?",
+    hint1: "You cannot see me.",
+    hint2: "I can be captured but never held.",
+    been_used: false,
+    answer: "echo"
+  });
+
+  addPuzzle('riddle_puzzles', {
+    puzzle_string: "The more of this there is, the less you see. What is it?",
+    hint1: "It's not a solid.",
+    hint2: "It's often feared in large amounts.",
+    been_used: false,
+    answer: "darkness"
+  });
+
+  addPuzzle('riddle_puzzles', {
+    puzzle_string: "What has a head, a tail, is brown, and has no legs?",
+    hint1: "You use it to purchase things.",
+    hint2: "It's not an animal.",
+    been_used: false,
+    answer: "penny"
+  });
+
   addPuzzle('math_puzzles', {
     puzzle_string: 'What is the square root of 144?',
     hint1: 'It is a dozen',
@@ -119,6 +143,30 @@ export function initializePuzzles() {
     answer: '125'
   });
 
+  addPuzzle('math_puzzles', {
+    puzzle_string: "If two’s company, and three’s a crowd, what are four and five?",
+    hint1: "Think of numbers, not idioms.",
+    hint2: "It's a single-digit number.",
+    been_used: false,
+    answer: '9'
+  });
+
+  addPuzzle('math_puzzles', {
+    puzzle_string: "What three positive numbers give the same result when multiplied and added together?",
+    hint1: "They are all the same number.",
+    hint2: "The number is less than 3.",
+    been_used: false,
+    answer: '1'
+  });
+
+  addPuzzle('math_puzzles', {
+    puzzle_string: "A grandfather, two fathers, and two sons went to the movie theater together and everyone bought one movie ticket each. How many tickets did they buy in total?",
+    hint1: "Think about the relationships.",
+    hint2: "The total is less than 5.",
+    been_used: false,
+    answer: '3'
+  });
+
   addPuzzle('pattern_puzzles', {
     puzzle_string: "Complete the sequence: 2, 4, 8, 16, _",
     hint1: "Doubling each time",
@@ -134,6 +182,31 @@ export function initializePuzzles() {
     been_used: false,
     answer: "22"
   });
+
+  addPuzzle('pattern_puzzles', {
+    puzzle_string: "What comes next in the series: JFMAMJJASON_",
+    hint1: "Think of a calendar.",
+    hint2: "The answer is a single letter.",
+    been_used: false,
+    answer: "D"
+});
+
+  addPuzzle('pattern_puzzles', {
+    puzzle_string: "Find the next number in the sequence: 1, 1, 2, 3, 5, 8, _",
+    hint1: "It's a famous sequence.",
+    hint2: "Each number is the sum of the two preceding ones.",
+    been_used: false,
+    answer: "13"
+  });
+
+  addPuzzle('pattern_puzzles', {
+    puzzle_string: "What comes next: O, T, T, F, F, S, S, _",
+    hint1: "Think of counting.",
+    hint2: "The answer is the first letter of a number.",
+    been_used: false,
+    answer: "E"
+  });
+
 
   logAllPuzzles("math_puzzles")
 }
