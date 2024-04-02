@@ -2,12 +2,15 @@ import { updateDailyActivity } from './db_conn.js';
 import { fetchAndUpdateRandomPuzzle } from "./puzzles_db.js";
 
 document.addEventListener('DOMContentLoaded', function () {
-    let currentCorrectAnswer = '100'; // Correct answer for the initial puzzle
-    let initialHint1 = "Hint 1: Start with 1000 and break down the problem one step at a time. 9/10 of 1000 is 900, 8/9 of 900 is 800, etc."; // hint1 for the initial puzzle
-    let initialHint2 = 'Hint 2: Alternatively, work with the fractions and cancel all of the like numerators and denominators until you have a simple calculation remaining.'; // hint2 for the initial puzzle
+    // Attempt to load puzzle details from localStorage, or use default values
+    let currentCorrectAnswer = localStorage.getItem('currentMathAnswer') || '100'; // Fallback to '100' if not found
+    let initialHint1 = localStorage.getItem('mathHint1') || "Hint 1: Start with 1000 and break down the problem one step at a time. 9/10 of 1000 is 900, 8/9 of 900 is 800, etc."; // Fallback hint
+    let initialHint2 = localStorage.getItem('mathHint2') || 'Hint 2: Alternatively, work with the fractions and cancel all of the like numerators and denominators until you have a simple calculation remaining.'; // Fallback hint
+    let puzzleString = localStorage.getItem('mathPuzzleString') || "What is the value of 1/2 of 2/3 of 3/4 of 4/5 of 5/6 of 6/7 of 7/8 of 8/9 of 9/10 of 1,000?"; // Fallback puzzle string
     let startTime = Date.now();
 
-    // Setup hint buttons with initial hints, before any new puzzles are loaded
+    // Update the puzzle display and hints with either the stored values or the initial values
+    document.getElementById('math-question').textContent = puzzleString; // Set puzzle string
     document.getElementById('hint1').onclick = () => alert(initialHint1);
     document.getElementById('hint2').onclick = () => alert(initialHint2);
 
@@ -63,9 +66,9 @@ document.addEventListener('DOMContentLoaded', function () {
         return finalScore;
     }
 
-    // Listen for the countdownFinished event
+    // Listen for the countdownFinished event, deprecated
     document.addEventListener('countdownFinished', function() {
-        updateMathQuestion();
+        //updateMathQuestion();
     });
 
     // Check if update is needed for this puzzle type, if user is not on this page when countdown finished
@@ -81,15 +84,20 @@ document.addEventListener('DOMContentLoaded', function () {
             if (mathQuestion) {
                 mathQuestion.textContent = puzzle.puzzle_string; // Update the question text
             }
-
-            // Update the global correct answer variable
+    
+            // Update the global correct answer variable and store new puzzle details in localStorage
             currentCorrectAnswer = puzzle.answer;
-
-            // Optionally, set up hint buttons or text based on fetched puzzle
+            localStorage.setItem('currentMathAnswer', puzzle.answer);
+            localStorage.setItem('mathHint1', puzzle.hint1);
+            localStorage.setItem('mathHint2', puzzle.hint2);
+            localStorage.setItem('mathPuzzleString', puzzle.puzzle_string);
+    
+            // Setup hint buttons with new hints
             document.getElementById('hint1').onclick = () => alert(puzzle.hint1);
             document.getElementById('hint2').onclick = () => alert(puzzle.hint2);
         }).catch(error => {
             console.error("Error fetching/updating math puzzle:", error);
         });
     }
+    
 });

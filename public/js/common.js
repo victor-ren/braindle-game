@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const now = new Date();
 
         //DECIDE AMOUNT OF TIME BEFORE THE PUZZLES REFRESH
-        let timer = 60*5; //in seconds, 5 minutes right now
+        let timer = 60*60*24; //in seconds, 24 hours refresh interval right now, PLEASE CHANGE TO LOWER NUMBER TO SEE PUZZLES REFRESH!
         timer = timer * 1000; //multiply by 1000 milliseconds to convert into seconds 
 
         // Calculate how many milliseconds have passed in the current timer block
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Check if the countdown has reached 0
         if (timeDifference <= 1000) { // Check if we are within the last second of the countdown
             console.log("Countdown over"); // This will log "Countdown over" to the console
-            document.dispatchEvent(new CustomEvent('countdownFinished')); //REFRESHES NEW PUZZLES
+            //document.dispatchEvent(new CustomEvent('countdownFinished')); //don't use this to refresh new puzzles anymore, but use the flags
             //flag to refresh puzzles, IN CASE USER IS NOT ON THE PUZZLE'S PAGE 
             localStorage.setItem('updateMathPuzzle', 'true');
             localStorage.setItem('updateRiddlePuzzle', 'true');

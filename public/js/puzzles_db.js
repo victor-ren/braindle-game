@@ -152,14 +152,6 @@ export function initializePuzzles() {
   });
 
   addPuzzle('math_puzzles', {
-    puzzle_string: "What three positive numbers give the same result when multiplied and added together?",
-    hint1: "They are all the same number.",
-    hint2: "The number is less than 3.",
-    been_used: false,
-    answer: '1'
-  });
-
-  addPuzzle('math_puzzles', {
     puzzle_string: "A grandfather, two fathers, and two sons went to the movie theater together and everyone bought one movie ticket each. How many tickets did they buy in total?",
     hint1: "Think about the relationships.",
     hint2: "The total is less than 5.",

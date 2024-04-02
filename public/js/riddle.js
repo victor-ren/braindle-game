@@ -2,12 +2,15 @@ import { updateDailyActivity } from './db_conn.js';
 import { fetchAndUpdateRandomPuzzle, logAllPuzzles } from "./puzzles_db.js";
 
 document.addEventListener('DOMContentLoaded', function () {
-    let currentCorrectAnswer = 'FRIDAY'; // Correct answer for the initial puzzle
-    let initialHint1 = "Hint 1: Break down the sentence into smaller parts to make it more simple."; // hint1 for the initial puzzle
-    let initialHint2 = 'Hint 2: Think of "the day before tomorrow" as "today".'; // hint2 for the initial puzzle
+    // Attempt to load riddle details from localStorage, or use default values
+    let currentCorrectAnswer = localStorage.getItem('currentRiddleAnswer') || 'FRIDAY'; // Fallback to 'FRIDAY' if not found
+    let initialHint1 = localStorage.getItem('riddleHint1') || "Hint 1: Break down the sentence into smaller parts to make it more simple."; // Fallback hint
+    let initialHint2 = localStorage.getItem('riddleHint2') || 'Hint 2: Think of "the day before tomorrow" as "today".'; // Fallback hint
+    let puzzleString = localStorage.getItem('riddlePuzzleString') || "The day before two days after the day before tomorrow is Saturday. What day is it today?"; // Set your default riddle string
     let startTime = Date.now();
 
-    // Setup hint buttons with initial hints, before any new puzzles are loaded
+    // Update the riddle display and hints with either the stored values or the initial values
+    document.getElementById('riddle-question').textContent = puzzleString; // Set riddle string
     document.getElementById('hint1').onclick = () => alert(initialHint1);
     document.getElementById('hint2').onclick = () => alert(initialHint2);
 
@@ -67,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Listen for the countdownFinished event
     document.addEventListener('countdownFinished', function() {
-        updateRiddleQuestion();
+        //updateRiddleQuestion(); //deprecated
         console.log("updating riddle questions")
         logAllPuzzles("riddle_puzzles")
     });
@@ -81,22 +84,27 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function updateRiddleQuestion() {
         fetchAndUpdateRandomPuzzle('riddle_puzzles').then(puzzle => {
-            // Update UI with the fetched puzzle details
+            // Update UI with the fetched riddle details
             const riddleQuestion = document.getElementById('riddle-question');
             if (riddleQuestion) {
-                riddleQuestion.textContent = puzzle.puzzle_string; // Update the question text
+                riddleQuestion.textContent = puzzle.puzzle_string; // Update the riddle text
             }
-
-            // Update the global correct answer variable
-            currentCorrectAnswer = puzzle.answer;
-
-            // Optionally, set up hint buttons or text based on fetched puzzle
+    
+            // Update the global correct answer variable and store new riddle details in localStorage
+            currentCorrectAnswer = puzzle.answer.toLowerCase(); // Ensuring the answer is in uppercase for comparison
+            localStorage.setItem('currentRiddleAnswer', puzzle.answer);
+            localStorage.setItem('riddleHint1', puzzle.hint1);
+            localStorage.setItem('riddleHint2', puzzle.hint2);
+            localStorage.setItem('riddlePuzzleString', puzzle.puzzle_string);
+    
+            // Setup hint buttons with new hints
             document.getElementById('hint1').onclick = () => alert(puzzle.hint1);
             document.getElementById('hint2').onclick = () => alert(puzzle.hint2);
         }).catch(error => {
             console.error("Error fetching/updating riddle puzzle:", error);
-        });        
+        });
     }
+    
 
 
 

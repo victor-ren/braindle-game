@@ -2,20 +2,23 @@ import { updateDailyActivity } from './db_conn.js';
 import { fetchAndUpdateRandomPuzzle, logAllPuzzles } from "./puzzles_db.js";
 
 document.addEventListener('DOMContentLoaded', function () {
-    let currentCorrectAnswer = '318'; // Correct answer for the initial puzzle
-    let initialHint1 = "Hint 1: Observe the pattern carefully. Each number is generated in a specific way from its predecessor."; // hint1 for the initial puzzle
-    let initialHint2 = "Hint 2: Try to determine the rule governing the sequence. It might involve arithmetic or geometric operations."; // hint2 for the initial puzzle
+    // Attempt to load puzzle details from localStorage, or use default values
+    let currentCorrectAnswer = localStorage.getItem('currentPatternAnswer') || '318'; // Fallback to '318' if not found
+    let initialHint1 = localStorage.getItem('patternHint1') || "Hint 1: Observe the pattern carefully. Each number is generated in a specific way from its predecessor."; // Fallback hint
+    let initialHint2 = localStorage.getItem('patternHint2') || "Hint 2: Try to determine the rule governing the sequence. It might involve arithmetic or geometric operations."; // Fallback hint
+    let puzzleString = localStorage.getItem('patternPuzzleString') || "What is the next number in the sequence? 3, 8, 18, 38, 78, 158..."; // Set your default puzzle string
     let startTime = Date.now();
 
-    // Setup hint buttons with initial hints, before any new puzzles are loaded
+    // Update the puzzle display and hints with either the stored values or the initial values
+    document.getElementById('pattern-question').textContent = puzzleString; // Set puzzle string
     document.getElementById('hint1').onclick = () => alert(initialHint1);
     document.getElementById('hint2').onclick = () => alert(initialHint2);
 
-    fetch('/puzzles')
-        .then(response => response.json())
-        .then(puzzles => {
-            document.getElementById('pattern-question').textContent = puzzles.pattern.question;
-        });
+    // fetch('/puzzles')
+    //     .then(response => response.json())
+    //     .then(puzzles => {
+    //         document.getElementById('pattern-question').textContent = puzzles.pattern.question;
+    //     });
 
     document.querySelectorAll('#keyboard .key').forEach(function(key) {
         key.addEventListener('click', function() {
@@ -71,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Listen for the countdownFinished event
     document.addEventListener('countdownFinished', function() {
-        updatePatternQuestion();
+        //updatePatternQuestion(); //deprecated
         console.log("updating pattern questions")
         logAllPuzzles("pattern_puzzles")
     });
@@ -89,17 +92,22 @@ document.addEventListener('DOMContentLoaded', function () {
             if (patternQuestion) {
                 patternQuestion.textContent = puzzle.puzzle_string; // Update the question text
             }
-
-            // Update the global correct answer variable
+    
+            // Update the global correct answer variable and store new puzzle details in localStorage
             currentCorrectAnswer = puzzle.answer;
-
-            // Optionally, set up hint buttons or text based on fetched puzzle
+            localStorage.setItem('currentPatternAnswer', puzzle.answer);
+            localStorage.setItem('patternHint1', puzzle.hint1);
+            localStorage.setItem('patternHint2', puzzle.hint2);
+            localStorage.setItem('patternPuzzleString', puzzle.puzzle_string);
+    
+            // Setup hint buttons with new hints
             document.getElementById('hint1').onclick = () => alert(puzzle.hint1);
             document.getElementById('hint2').onclick = () => alert(puzzle.hint2);
         }).catch(error => {
             console.error("Error fetching/updating pattern puzzle:", error);
         });
     }
+    
 
 
 
