@@ -243,35 +243,28 @@ export function updateDailyActivity(username, puzzleType, status, score) {
                 userData.dailyActivities.unshift(todayActivity); // Add to the start of the array
             }
             
-            // Update the status and score for the puzzle type
-            todayActivity[puzzleType] = status;
-            if (status === 'completed') {
-                todayActivity.dailyScore = (todayActivity.dailyScore || 0) + score;
-                userData.total_score = (userData.total_score || 0) + score;
-            }
+            // Prevent updating if the puzzle has already been attempted today
+            if (todayActivity[puzzleType] === 'unattempted') {
+                todayActivity[puzzleType] = status;
 
-            if (puzzleType === 'math' && status === 'completed') {
-                userData.maths_solved = (userData.maths_solved || 0) + 1;
-            }
+                if (status === 'completed') {
+                    todayActivity.dailyScore += score;
+                    userData.total_score += score;
 
-            if (puzzleType === 'riddle' && status === 'completed') {
-                userData.riddles_solved = (userData.riddles_solved || 0) + 1;
-            }
+                    if (puzzleType === 'math') userData.maths_solved++;
+                    else if (puzzleType === 'riddle') userData.riddles_solved++;
+                    else if (puzzleType === 'pattern') userData.patterns_solved++;
+                }
 
-            if (puzzleType === 'pattern' && status === 'completed') {
-                userData.patterns_solved = (userData.patterns_solved || 0) + 1;
-            }
+                const allCompleted = ['math', 'riddle', 'pattern'].every(type => todayActivity[type] === 'completed');
+                if (allCompleted) {
+                    userData.current_streak++;
+                    userData.max_streak = Math.max(userData.max_streak, userData.current_streak);
+                } else {
+                    userData.current_streak = 0;
+                }
 
-            if (todayActivity.math === 'completed' && todayActivity.riddle === 'completed' && todayActivity.pattern === 'completed') {
-                userData.current_streak = (userData.current_streak || 0) + 1;
-                userData.max_streak = Math.max(userData.max_streak, userData.current_streak);
-            } else {
-                userData.current_streak = 0;
-            }
-            
-            if (userData.dailyActivities && userData.dailyActivities.length > 0) {
-                const mostRecentActivity = userData.dailyActivities[0];
-                userData.daily_score = mostRecentActivity.dailyScore;
+                userData.daily_score = todayActivity.dailyScore;
             }
 
             store.put(userData);
